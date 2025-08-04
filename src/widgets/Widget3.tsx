@@ -33,13 +33,13 @@ const chartConfig = {
 
 export function Widget3() {
 	return (
-		<Card>
+		<Card className='flex flex-col aspect-[3/3]'>
 			<CardHeader>
 				<CardTitle>Bar Chart - Custom Label</CardTitle>
 				<CardDescription>January - June 2024</CardDescription>
 			</CardHeader>
-			<CardContent>
-				<ChartContainer config={chartConfig}>
+			<CardContent className='flex-1 pb-0'>
+				<ChartContainer config={chartConfig} className='mx-auto max-h-[250px]'>
 					<BarChart
 						accessibilityLayer
 						data={chartData}

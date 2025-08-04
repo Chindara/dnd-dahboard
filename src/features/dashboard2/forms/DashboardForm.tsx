@@ -93,7 +93,7 @@ const DashboardForm = () => {
 			</div>
 
 			{/* Dashboard Grid */}
-			<div ref={ref} className='h-full w-full overflow-auto'>
+			<div ref={ref} className='h-full w-full'>
 				{width && (
 					<GridLayout
 						layout={layout}
@@ -116,11 +116,11 @@ const DashboardForm = () => {
 						{dashboardWidgets.map((w) => {
 							const WidgetComponent = widgetRegistry[w.widgetKey].component;
 							return (
-								<div key={w.key} className='relative'>
+								<div key={w.key}>
 									{editMode && (
 										<button
 											onClick={() => handleRemoveWidget(w.key)}
-											className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 z-50 hover:bg-red-900 transition pointer-events-auto'
+											className=' top-1 right-1 bg-red-500 text-white rounded-full p-1 z-50 hover:bg-red-900 transition pointer-events-auto'
 										>
 											<X size={16} />
 										</button>

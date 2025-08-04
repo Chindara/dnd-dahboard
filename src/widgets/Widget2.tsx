@@ -30,13 +30,13 @@ const chartConfig = {
 
 export function Widget2() {
 	return (
-		<Card>
+		<Card className='flex flex-col aspect-[3/3]'>
 			<CardHeader>
 				<CardTitle>Bar Chart - Multiple</CardTitle>
 				<CardDescription>January - June 2024</CardDescription>
 			</CardHeader>
-			<CardContent>
-				<ChartContainer config={chartConfig}>
+			<CardContent className='flex-1 pb-0'>
+				<ChartContainer config={chartConfig} className='mx-auto max-h-[250px]'>
 					<BarChart accessibilityLayer data={chartData}>
 						<CartesianGrid vertical={false} />
 						<XAxis dataKey='month' tickLine={false} tickMargin={10} axisLine={false} tickFormatter={(value) => value.slice(0, 3)} />

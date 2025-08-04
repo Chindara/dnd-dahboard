@@ -30,13 +30,13 @@ const chartConfig = {
 
 export function Widget6() {
 	return (
-		<Card>
-			<CardHeader className='items-center pb-4'>
+		<Card className='flex flex-col aspect-[3/3]'>
+			<CardHeader>
 				<CardTitle>Radar Chart - Lines Only</CardTitle>
 				<CardDescription>Showing total visitors for the last 6 months</CardDescription>
 			</CardHeader>
-			<CardContent className='pb-0'>
-				<ChartContainer config={chartConfig} className='mx-auto aspect-square max-h-[250px]'>
+			<CardContent className='flex-1 pb-0'>
+				<ChartContainer config={chartConfig} className='mx-auto max-h-[250px]'>
 					<RadarChart data={chartData}>
 						<ChartTooltip cursor={false} content={<ChartTooltipContent indicator='line' />} />
 						<PolarAngleAxis dataKey='month' />
@@ -46,11 +46,11 @@ export function Widget6() {
 					</RadarChart>
 				</ChartContainer>
 			</CardContent>
-			<CardFooter className='flex-col gap-2 text-sm'>
-				<div className='flex items-center gap-2 leading-none font-medium'>
+			<CardFooter className='flex-col items-start gap-2 text-sm'>
+				<div className='flex gap-2 leading-none font-medium'>
 					Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
 				</div>
-				<div className='text-muted-foreground flex items-center gap-2 leading-none'>January - June 2024</div>
+				<div className='text-muted-foreground leading-none'>Showing total visitors for the last 6 months</div>
 			</CardFooter>
 		</Card>
 	);
