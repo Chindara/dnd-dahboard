@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { WidgetKey, widgetRegistry } from '@/widgets/WidgetRegistry';
-import { X } from 'lucide-react';
+import { EllipsisVertical, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useResizeDetector } from 'react-resize-detector';
 
@@ -98,7 +98,7 @@ const DashboardForm = () => {
 					<GridLayout
 						layout={layout}
 						cols={12}
-						rowHeight={100}
+						rowHeight={124}
 						width={width}
 						isDraggable={editMode}
 						isResizable={false}
@@ -116,18 +116,13 @@ const DashboardForm = () => {
 						{dashboardWidgets.map((w) => {
 							const WidgetComponent = widgetRegistry[w.widgetKey].component;
 							return (
-								<div key={w.key}>
+								<div key={w.key} className='relative bg-green-500'>
 									{editMode && (
-										<button
-											onClick={() => handleRemoveWidget(w.key)}
-											className=' top-1 right-1 bg-red-500 text-white rounded-full p-1 z-50 hover:bg-red-900 transition pointer-events-auto'
-										>
-											<X size={16} />
-										</button>
+										<Button className='absolute top-1 right-1 bg-red-500 text-white rounded-full z-50' onClick={() => handleRemoveWidget(w.key)}>
+											<X />
+										</Button>
 									)}
-									<div className='z-0'>
-										<WidgetComponent />
-									</div>
+									<WidgetComponent />
 								</div>
 							);
 						})}
