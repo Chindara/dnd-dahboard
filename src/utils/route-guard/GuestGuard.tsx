@@ -11,7 +11,7 @@ const GuestGuard = ({ children }: { children: React.ReactNode }) => {
 		if (!isLoggedIn) return () => navigate('/login', { replace: true });
 
 		if (isLoggedIn) {
-			return () => navigate('/dashboard', { replace: true });
+			return () => navigate('/dashboard2', { replace: true });
 		}
 	}, [isLoggedIn, navigate]);
 

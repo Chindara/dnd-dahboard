@@ -1,46 +1,86 @@
-import { cn } from '@/lib/utils';
+import { Widget1 } from './Widget1';
+import { Widget2 } from './Widget2';
+import { Widget3 } from './Widget3';
+import { Widget4 } from './Widget4';
+import { Widget5 } from './Widget5';
+import { Widget6 } from './Widget6';
+import { Widget7 } from './Widget7';
+import { Widget8 } from './Widget8';
 
 // src/widgets/widgetRegistry.tsx
-export type WidgetKey = 'weather' | 'chart' | 'text';
+export type WidgetKey = 'widget1' | 'widget2' | 'widget3' | 'widget4' | 'widget5' | 'widget6' | 'widget7' | 'widget8';
 
 export const widgetRegistry = {
-	weather: {
-		id: 'weather',
-		name: 'Weather Widget',
-		description: 'Shows current weather info.',
+	widget1: {
+		id: 'widget1',
+		name: 'Pie Chart - Donut with Text',
+		description: 'Pie Chart - Donut with Text.',
 		image: '@/../src/assets/weather.jpg',
-		defaultW: 4,
-		defaultH: 2,
-		component: () => (
-			<div className={cn('rounded-sm p-4 shadow-sm border transition-colors', 'bg-white text-black border-gray-200', 'dark:bg-gray-900 dark:text-white dark:border-gray-700')}>
-				Weather Info
-			</div>
-		),
-	},
-	chart: {
-		id: 'chart',
-		name: 'Chart Widget',
-		description: 'Displays analytics in chart form.',
-		image: '@/../src/assets/chart.jpg',
-		defaultW: 6,
+		defaultW: 3,
 		defaultH: 3,
-		component: () => (
-			<div className={cn('rounded-md p-4 shadow-sm border transition-colors', 'bg-white text-black border-gray-200', 'dark:bg-gray-900 dark:text-white dark:border-gray-700')}>
-				Chart
-			</div>
-		),
+		component: () => <Widget1 />,
 	},
-	text: {
-		id: 'text',
-		name: 'Text Widget',
-		description: 'Write notes or reminders.',
+	widget2: {
+		id: 'widget2',
+		name: 'Bar Chart - Multiple',
+		description: 'Bar Chart - Multiple.',
+		image: '@/../src/assets/chart.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget2 />,
+	},
+	widget3: {
+		id: 'widget3',
+		name: 'Bar Chart - Custom Label',
+		description: 'Bar Chart - Custom Label',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 2,
-		component: () => (
-			<div className={cn('rounded-md p-4 shadow-sm border transition-colors', 'bg-white text-black border-gray-200', 'dark:bg-gray-900 dark:text-white dark:border-gray-700')}>
-				Text Note
-			</div>
-		),
+		defaultH: 3,
+		component: () => <Widget3 />,
+	},
+	widget4: {
+		id: 'widget4',
+		name: 'Line Chart - Multiple',
+		description: 'Line Chart - Multiple',
+		image: '@/../src/assets/gender.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget4 />,
+	},
+	widget5: {
+		id: 'widget5',
+		name: 'Line Chart - Custom Label',
+		description: 'Line Chart - Custom Label',
+		image: '@/../src/assets/gender.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget5 />,
+	},
+	widget6: {
+		id: 'widget6',
+		name: 'Radar Chart - Lines Only',
+		description: 'Radar Chart - Lines Only',
+		image: '@/../src/assets/gender.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget6 />,
+	},
+	widget7: {
+		id: 'widget7',
+		name: 'Radial Chart - Grid',
+		description: 'Radial Chart - Grid',
+		image: '@/../src/assets/gender.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget7 />,
+	},
+	widget8: {
+		id: 'widget8',
+		name: 'Radial Chart - Stacked',
+		description: 'Radial Chart - Stacked',
+		image: '@/../src/assets/gender.jpg',
+		defaultW: 3,
+		defaultH: 3,
+		component: () => <Widget8 />,
 	},
 };

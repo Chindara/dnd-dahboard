@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GridLayout from 'react-grid-layout';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { WidgetKey, widgetRegistry } from '@/widgets/WidgetRegistry';
@@ -54,6 +54,7 @@ const DashboardForm = () => {
 	};
 
 	const handleRemoveWidget = (key: string) => {
+		console.log(`Removing widget with key: ${key}`);
 		setDashboardWidgets((prev) => prev.filter((w) => w.key !== key));
 	};
 
@@ -73,7 +74,7 @@ const DashboardForm = () => {
 	}));
 
 	return (
-		<div className='flex flex-col h-screen'>
+		<div>
 			{/* Header */}
 			<div className='p-4 border-b flex justify-between items-center'>
 				<h2 className='text-xl font-semibold'>My Dashboard</h2>
@@ -115,13 +116,16 @@ const DashboardForm = () => {
 						{dashboardWidgets.map((w) => {
 							const WidgetComponent = widgetRegistry[w.widgetKey].component;
 							return (
-								<div key={w.key} className='bg-white dark:bg-gray-900 rounded shadow-md relative overflow-hidden'>
+								<div key={w.key} className='relative'>
 									{editMode && (
-										<button onClick={() => handleRemoveWidget(w.key)} className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 z-10'>
+										<button
+											onClick={() => handleRemoveWidget(w.key)}
+											className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 z-50 hover:bg-red-900 transition pointer-events-auto'
+										>
 											<X size={16} />
 										</button>
 									)}
-									<div className='p-2'>
+									<div className='z-0'>
 										<WidgetComponent />
 									</div>
 								</div>
@@ -134,8 +138,10 @@ const DashboardForm = () => {
 			{/* Right-Side Widget Library */}
 			<Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
 				<SheetContent side='right' className='w-[400px] flex flex-col bg-white dark:bg-gray-900'>
-					<h3 className='text-lg font-semibold mb-4'>Add Widgets</h3>
-
+					<SheetHeader>
+						<SheetTitle>Add Widgets</SheetTitle>
+					</SheetHeader>
+					<SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
 					<div className='space-y-2 overflow-y-auto flex-1'>
 						{Object.entries(widgetRegistry).map(([key, widget]) => (
 							<div
