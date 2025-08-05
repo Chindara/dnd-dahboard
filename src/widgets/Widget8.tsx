@@ -21,7 +21,7 @@ export function Widget8() {
 	const totalVisitors = chartData[0].desktop + chartData[0].mobile;
 
 	return (
-		<WidgetCard title='Radial Chart - Stacked' description='January - June 2024'>
+		<WidgetCard title='Radial Chart - Stacked'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<RadialBarChart data={chartData} endAngle={180} innerRadius={80} outerRadius={130}>

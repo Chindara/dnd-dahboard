@@ -46,7 +46,11 @@ export function Widget1() {
 	}, []);
 
 	return (
-		<WidgetCard title='Pie Chart - Donut with Text' description='January - June 2024'>
+		<WidgetCard title='Pie Chart - Donut with Text'>
+			<div className='flex items-end space-x-2'>
+				<h1 className='text-3xl text-pretty font-bold tracking-tighter'>1125</h1>
+				<span className='text-sm text-gray-500'>Visitors</span>
+			</div>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<PieChart>

@@ -30,7 +30,11 @@ const chartConfig = {
 
 export function Widget2() {
 	return (
-		<WidgetCard title='Bar Chart - Multiple' description='January - June 2024'>
+		<WidgetCard title='Avg. Energy Consumption'>
+			<div className='flex items-end space-x-1'>
+				<h1 className='text-3xl text-pretty font-bold tracking-tighter'>2,589</h1>
+				<span className='text-sm text-gray-500 tracking-tight'>bpm per day</span>
+			</div>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart accessibilityLayer data={chartData}>
