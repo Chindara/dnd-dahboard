@@ -1,9 +1,9 @@
 'use client';
 
-import { TrendingUp } from 'lucide-react';
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from 'recharts';
+// import { TrendingUp } from 'lucide-react';
+import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { WidgetCard } from './WidgetCard';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
 export const description = 'A bar chart with a custom label';
@@ -33,13 +33,9 @@ const chartConfig = {
 
 export function Widget3() {
 	return (
-		<Card className='flex flex-col aspect-[3/3]'>
-			<CardHeader>
-				<CardTitle>Bar Chart - Custom Label</CardTitle>
-				<CardDescription>January - June 2024</CardDescription>
-			</CardHeader>
-			<CardContent className='flex-1 pb-0'>
-				<ChartContainer config={chartConfig} className='mx-auto max-h-[250px]'>
+		<WidgetCard title='Bar Chart - Custom Label' description='January - June 2024'>
+			<ChartContainer config={chartConfig} className='w-full h-full'>
+				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart
 						accessibilityLayer
 						data={chartData}
@@ -57,14 +53,8 @@ export function Widget3() {
 							<LabelList dataKey='desktop' position='right' offset={8} className='fill-foreground' fontSize={12} />
 						</Bar>
 					</BarChart>
-				</ChartContainer>
-			</CardContent>
-			<CardFooter className='flex-col items-start gap-2 text-sm'>
-				<div className='flex gap-2 leading-none font-medium'>
-					Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
-				</div>
-				<div className='text-muted-foreground leading-none'>Showing total visitors for the last 6 months</div>
-			</CardFooter>
-		</Card>
+				</ResponsiveContainer>
+			</ChartContainer>
+		</WidgetCard>
 	);
 }

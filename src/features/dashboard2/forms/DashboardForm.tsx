@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GridLayout from 'react-grid-layout';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import 'react-grid-layout/css/styles.css';
@@ -19,6 +19,11 @@ type DashboardWidget = {
 };
 
 const STORAGE_KEY = 'dashboard-widgets';
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 };
+const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
 
 const DashboardForm = () => {
 	const { width, ref } = useResizeDetector();
@@ -65,13 +70,16 @@ const DashboardForm = () => {
 		setDrawerOpen(false);
 	};
 
-	const layout = dashboardWidgets.map((w) => ({
-		i: w.key,
-		x: w.x ?? 0,
-		y: w.y ?? Infinity,
-		w: w.w,
-		h: w.h,
-	}));
+	// Layouts for all breakpoints
+	const layouts = {
+		lg: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: w.w, h: w.h })),
+		md: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 6), h: w.h })),
+		sm: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 4), h: w.h })),
+		xs: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 2), h: w.h })),
+		xxs: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: 2, h: w.h })),
+	};
+
+	// console.log('Current layout:', layouts);
 
 	return (
 		<div>
@@ -95,14 +103,25 @@ const DashboardForm = () => {
 			{/* Dashboard Grid */}
 			<div ref={ref} className='h-full w-full'>
 				{width && (
-					<GridLayout
-						layout={layout}
-						cols={12}
-						rowHeight={124}
+					<ResponsiveGridLayout
+						className='layout'
+						verticalCompact={true}
+						layouts={layouts}
+						breakpoints={breakpoints}
+						cols={cols}
+						rowHeight={80}
 						width={width}
 						isDraggable={editMode}
-						isResizable={false}
+						isResizable={editMode}
 						draggableCancel='.widget-delete-btn'
+						autoSize={true}
+						margin={{
+							lg: [10, 10],
+							md: [10, 10],
+							sm: [10, 10],
+							xs: [10, 10],
+							xxs: [10, 10],
+						}}
 						onLayoutChange={(newLayout) => {
 							if (editMode) {
 								setDashboardWidgets((prev) =>
@@ -134,7 +153,7 @@ const DashboardForm = () => {
 								</div>
 							);
 						})}
-					</GridLayout>
+					</ResponsiveGridLayout>
 				)}
 			</div>
 
@@ -145,13 +164,13 @@ const DashboardForm = () => {
 						<SheetTitle>Add Widgets</SheetTitle>
 					</SheetHeader>
 					<SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
-					<div className='space-y-2 overflow-y-auto flex-1'>
+					<div className='space-y-1 overflow-y-auto flex-1'>
 						{Object.entries(widgetRegistry).map(([key, widget]) => (
 							<div
 								key={key}
 								onClick={() => setSelectedWidgetKey(key as WidgetKey)}
 								className={cn(
-									'flex gap-3 items-start p-3 rounded-sm cursor-pointer transition',
+									'flex gap-2 items-start p-2 rounded-sm cursor-pointer transition',
 									selectedWidgetKey === key ? 'bg-blue-100 dark:bg-blue-900/40 border-l-4 border-blue-500' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
 								)}
 							>

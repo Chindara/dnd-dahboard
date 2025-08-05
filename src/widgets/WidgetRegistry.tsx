@@ -17,7 +17,7 @@ export const widgetRegistry = {
 		description: 'Pie Chart - Donut with Text.',
 		image: '@/../src/assets/weather.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget1 />,
 	},
 	widget2: {
@@ -26,7 +26,7 @@ export const widgetRegistry = {
 		description: 'Bar Chart - Multiple.',
 		image: '@/../src/assets/chart.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget2 />,
 	},
 	widget3: {
@@ -35,7 +35,7 @@ export const widgetRegistry = {
 		description: 'Bar Chart - Custom Label',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget3 />,
 	},
 	widget4: {
@@ -44,7 +44,7 @@ export const widgetRegistry = {
 		description: 'Line Chart - Multiple',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget4 />,
 	},
 	widget5: {
@@ -53,7 +53,7 @@ export const widgetRegistry = {
 		description: 'Line Chart - Custom Label',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget5 />,
 	},
 	widget6: {
@@ -62,7 +62,7 @@ export const widgetRegistry = {
 		description: 'Radar Chart - Lines Only',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget6 />,
 	},
 	widget7: {
@@ -71,7 +71,7 @@ export const widgetRegistry = {
 		description: 'Radial Chart - Grid',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget7 />,
 	},
 	widget8: {
@@ -80,7 +80,7 @@ export const widgetRegistry = {
 		description: 'Radial Chart - Stacked',
 		image: '@/../src/assets/gender.jpg',
 		defaultW: 3,
-		defaultH: 3,
+		defaultH: 2,
 		component: () => <Widget8 />,
 	},
 };
