@@ -109,8 +109,8 @@ const DashboardForm = () => {
 						layouts={layouts}
 						breakpoints={breakpoints}
 						cols={cols}
-						rowHeight={80}
-						width={width}
+						rowHeight={75}
+						width={width - 32}
 						isDraggable={editMode}
 						isResizable={editMode}
 						draggableCancel='.widget-delete-btn'

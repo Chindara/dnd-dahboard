@@ -34,7 +34,7 @@ const chartConfig = {
 export function Widget3() {
 	return (
 		<WidgetCard title='Bar Chart - Custom Label' description='January - June 2024'>
-			<ChartContainer config={chartConfig} className='w-full h-full'>
+			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart
 						accessibilityLayer

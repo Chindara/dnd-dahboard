@@ -31,7 +31,7 @@ const chartConfig = {
 export function Widget2() {
 	return (
 		<WidgetCard title='Bar Chart - Multiple' description='January - June 2024'>
-			<ChartContainer config={chartConfig} className='w-full h-full'>
+			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart accessibilityLayer data={chartData}>
 						<CartesianGrid vertical={false} />
