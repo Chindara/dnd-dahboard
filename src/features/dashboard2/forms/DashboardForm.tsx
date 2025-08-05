@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { WidgetKey, widgetRegistry } from '@/widgets/WidgetRegistry';
-import { EllipsisVertical, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useResizeDetector } from 'react-resize-detector';
 
@@ -102,6 +102,7 @@ const DashboardForm = () => {
 						width={width}
 						isDraggable={editMode}
 						isResizable={false}
+						draggableCancel='.widget-delete-btn'
 						onLayoutChange={(newLayout) => {
 							if (editMode) {
 								setDashboardWidgets((prev) =>
@@ -116,10 +117,17 @@ const DashboardForm = () => {
 						{dashboardWidgets.map((w) => {
 							const WidgetComponent = widgetRegistry[w.widgetKey].component;
 							return (
-								<div key={w.key} className='relative bg-green-500'>
+								<div key={w.key} className='relative'>
 									{editMode && (
-										<Button className='absolute top-1 right-1 bg-red-500 text-white rounded-full z-50' onClick={() => handleRemoveWidget(w.key)}>
-											<X />
+										<Button
+											className='widget-delete-btn absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white z-50 h-6 w-6 p-0'
+											onClick={(e) => {
+												e.stopPropagation();
+												handleRemoveWidget(w.key);
+											}}
+											onMouseDown={(e) => e.stopPropagation()}
+										>
+											<X className='h-6 w-6' />
 										</Button>
 									)}
 									<WidgetComponent />
