@@ -33,7 +33,7 @@ const chartConfig = {
 
 export function Widget3() {
 	return (
-		<WidgetCard title='Bar Chart - Custom Label'>
+		<WidgetCard title='Bar Chart - Custom Label' count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)} unit='kWh'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart

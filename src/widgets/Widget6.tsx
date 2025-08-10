@@ -26,7 +26,7 @@ const chartConfig = {
 
 export function Widget6() {
 	return (
-		<WidgetCard title='Radar Chart - Lines Only'>
+		<WidgetCard title='Radar Chart - Lines Only' count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)} unit='kWh'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<RadarChart data={chartData}>

@@ -40,7 +40,7 @@ const chartConfig = {
 
 export function Widget7() {
 	return (
-		<WidgetCard title='Radial Chart - Grid'>
+		<WidgetCard title='Radial Chart - Grid' count={chartData.reduce((acc, curr) => acc + curr.visitors, 0)} unit='visitors'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<RadialBarChart data={chartData} innerRadius={30} outerRadius={100}>

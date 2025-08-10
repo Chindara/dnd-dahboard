@@ -41,7 +41,7 @@ const chartConfig = {
 
 export function Widget5() {
 	return (
-		<WidgetCard title='Line Chart - Custom Label'>
+		<WidgetCard title='Line Chart - Custom Label' count={chartData.reduce((acc, curr) => acc + curr.visitors, 0)} unit='visitors'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<LineChart
