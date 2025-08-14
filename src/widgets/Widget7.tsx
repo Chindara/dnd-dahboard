@@ -5,48 +5,73 @@ import { WidgetCard } from './WidgetCard';
 export const description = 'A radial chart with a grid';
 
 const chartData = [
-	{ browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-	{ browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-	{ browser: 'firefox', visitors: 187, fill: 'var(--color-firefox)' },
-	{ browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-	{ browser: 'other', visitors: 90, fill: 'var(--color-other)' },
+	{ section: 'profile', completion: 600, fill: 'var(--color-profile)' },
+	{ section: 'cycle', completion: 185, fill: 'var(--color-cycle)' },
+	{ section: 'address', completion: 359, fill: 'var(--color-address)' },
+	{ section: 'family', completion: 100, fill: 'var(--color-family)' },
+	{ section: 'qualification', completion: 397, fill: 'var(--color-qualification)' },
+	{ section: 'experience', completion: 258, fill: 'var(--color-experience)' },
+	{ section: 'language', completion: 600, fill: 'var(--color-language)' },
+	{ section: 'skill', completion: 20, fill: 'var(--color-skill)' },
+	{ section: 'travel', completion: 50, fill: 'var(--color-travel)' },
+	{ section: 'extra', completion: 0, fill: 'var(--color-extra)' },
 ];
 
 const chartConfig = {
-	visitors: {
-		label: 'Visitors',
+	completion: {
+		label: 'Completion',
 	},
-	chrome: {
-		label: 'Chrome',
+	profile: {
+		label: 'Profile',
 		color: 'var(--chart-1)',
 	},
-	safari: {
-		label: 'Safari',
+	cycle: {
+		label: 'Cycle',
 		color: 'var(--chart-2)',
 	},
-	firefox: {
-		label: 'Firefox',
+	address: {
+		label: 'Address',
 		color: 'var(--chart-3)',
 	},
-	edge: {
-		label: 'Edge',
+	family: {
+		label: 'Family',
 		color: 'var(--chart-4)',
 	},
-	other: {
-		label: 'Other',
+	qualification: {
+		label: 'Qualification',
+		color: 'var(--chart-5)',
+	},
+	experience: {
+		label: 'Experience',
+		color: 'var(--chart-1)',
+	},
+	language: {
+		label: 'Language',
+		color: 'var(--chart-2)',
+	},
+	skill: {
+		label: 'Skill',
+		color: 'var(--chart-3)',
+	},
+	travel: {
+		label: 'Travel',
+		color: 'var(--chart-4)',
+	},
+	extra: {
+		label: 'Extra',
 		color: 'var(--chart-5)',
 	},
 } satisfies ChartConfig;
 
 export function Widget7() {
 	return (
-		<WidgetCard title='Radial Chart - Grid' count={chartData.reduce((acc, curr) => acc + curr.visitors, 0)} unit='visitors'>
+		<WidgetCard title='Radial Chart - Grid' count={chartData.reduce((acc, curr) => acc + curr.completion, 0)} unit='completion'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
-					<RadialBarChart data={chartData} innerRadius={30} outerRadius={100}>
-						<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel nameKey='browser' />} />
+					<RadialBarChart data={chartData} innerRadius={20}>
+						<ChartTooltip cursor={false} content={<ChartTooltipContent nameKey='section' />} />
 						<PolarGrid gridType='circle' />
-						<RadialBar dataKey='visitors' />
+						<RadialBar dataKey='completion' />
 					</RadialBarChart>
 				</ResponsiveContainer>
 			</ChartContainer>

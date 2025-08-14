@@ -23,7 +23,7 @@ const STORAGE_KEY = 'dashboard-widgets';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 };
-const cols = { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 };
+const cols = { lg: 12, md: 2, sm: 6, xs: 4, xxs: 2 };
 
 const DashboardForm = () => {
 	const { width, ref } = useResizeDetector();
@@ -50,8 +50,8 @@ const DashboardForm = () => {
 		const newWidget: DashboardWidget = {
 			key: Date.now().toString(),
 			widgetKey,
-			w: def.defaultW,
-			h: def.defaultH,
+			w: def.minW,
+			h: def.minH,
 			x: 0,
 			y: Infinity, // lets react-grid-layout auto-place it
 		};
@@ -72,14 +72,21 @@ const DashboardForm = () => {
 
 	// Layouts for all breakpoints
 	const layouts = {
-		lg: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: w.w, h: w.h })),
-		md: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 6), h: w.h })),
-		sm: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 4), h: w.h })),
-		xs: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: Math.min(w.w, 2), h: w.h })),
-		xxs: dashboardWidgets.map((w) => ({ i: w.key, x: w.x ?? 0, y: w.y ?? Infinity, w: 2, h: w.h })),
+		lg: dashboardWidgets.map((w) => {
+			const def = widgetRegistry[w.widgetKey];
+			return {
+				i: w.key,
+				x: w.x ?? 0,
+				y: w.y ?? 0,
+				w: w.w,
+				h: w.h,
+				minW: def.minW,
+				maxW: def.maxW,
+				minH: def.minH,
+				maxH: def.maxH,
+			};
+		}),
 	};
-
-	// console.log('Current layout:', layouts);
 
 	return (
 		<div>
@@ -105,8 +112,8 @@ const DashboardForm = () => {
 				{width && (
 					<ResponsiveGridLayout
 						className='layout'
-						verticalCompact={true}
 						layouts={layouts}
+						verticalCompact={true}
 						breakpoints={breakpoints}
 						cols={cols}
 						rowHeight={75}
@@ -115,19 +122,24 @@ const DashboardForm = () => {
 						isResizable={editMode}
 						draggableCancel='.widget-delete-btn'
 						autoSize={true}
-						margin={{
-							lg: [10, 10],
-							md: [10, 10],
-							sm: [10, 10],
-							xs: [10, 10],
-							xxs: [10, 10],
-						}}
 						onLayoutChange={(newLayout) => {
 							if (editMode) {
 								setDashboardWidgets((prev) =>
 									prev.map((widget) => {
+										const def = widgetRegistry[widget.widgetKey];
 										const updated = newLayout.find((l) => l.i === widget.key);
-										return updated ? { ...widget, w: updated.w, h: updated.h, x: updated.x, y: updated.y } : widget;
+										if (!updated) return widget;
+										// If minH === maxH, always restore the original height
+										const fixedH = def.minH === def.maxH ? def.minH : updated.h;
+										// If minW === maxW, always restore the original width
+										const fixedW = def.minW === def.maxW ? def.minW : updated.w;
+										return {
+											...widget,
+											w: fixedW,
+											h: fixedH,
+											x: updated.x,
+											y: updated.y,
+										};
 									})
 								);
 							}
