@@ -2,8 +2,6 @@ import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart, Responsiv
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { WidgetCard } from './WidgetCard';
 
-export const description = 'A radial chart with stacked sections';
-
 const chartData = [{ browser: 'safari', visitors: 1260, fill: 'var(--color-safari)' }];
 
 const chartConfig = {

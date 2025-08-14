@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CheckCircle } from 'lucide-react';
 
 interface WidgetCardProps {
 	title: string;
 	count?: number;
 	unit?: string;
 	children: React.ReactNode;
+	footer?: string;
 }
 
 type SizeMode = 'large' | 'medium' | 'small';
 
-export function WidgetCard({ title, count, unit, children }: WidgetCardProps) {
+export function WidgetCard({ title, count, unit, children, footer }: WidgetCardProps) {
 	const [sizeMode, setSizeMode] = useState<SizeMode>('large');
 	const cardRef = useRef<HTMLDivElement>(null);
 
@@ -54,6 +56,12 @@ export function WidgetCard({ title, count, unit, children }: WidgetCardProps) {
 				</CardHeader>
 			)}
 			<CardContent className='flex-1 min-h-0'>{children}</CardContent>
+
+			{footer && (
+				<CardFooter className='pt-0 text-gray-800 gap-2'>
+					<CheckCircle className='h-4 w-4 text-green-700' /> {footer}
+				</CardFooter>
+			)}
 		</Card>
 	);
 }

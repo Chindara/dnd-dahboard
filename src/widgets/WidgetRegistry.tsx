@@ -1,6 +1,7 @@
 import { AverageCheckInTile } from './AverageCheckInTile';
 import { AverageCheckOutTile } from './AverageCheckOutTile';
 import { AverageHoursTile } from './AverageHoursTile';
+import { MyAttendance } from './MyAttendance';
 import { OnTimeArrivalTile } from './OnTimeArrivalTile';
 import { TotalEmployeesChart } from './TotalEmployeesChart';
 import { Widget2 } from './Widget2';
@@ -24,7 +25,8 @@ export type WidgetKey =
 	| 'averageHours'
 	| 'averageCheckIn'
 	| 'averageCheckOut'
-	| 'onTimeArrival';
+	| 'onTimeArrival'
+	| 'myAttendance';
 
 export const widgetRegistry = {
 	widget1: {
@@ -162,5 +164,17 @@ export const widgetRegistry = {
 		maxW: 2,
 		maxH: 2,
 		component: () => <OnTimeArrivalTile />,
+	},
+
+	myAttendance: {
+		id: 'myAttendance',
+		name: 'My Attendance',
+		description: 'View my attendance details.',
+		image: '@/../src/assets/Widget12.png',
+		minW: 3,
+		minH: 4,
+		maxW: 4,
+		maxH: 4,
+		component: () => <MyAttendance />,
 	},
 };
