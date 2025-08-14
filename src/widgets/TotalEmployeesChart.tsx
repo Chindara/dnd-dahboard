@@ -4,54 +4,47 @@ import { Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { WidgetCard } from './WidgetCard';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
-export const description = 'A donut chart with text';
-
 const chartData = [
-	{ browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-	{ browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-	{ browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-	{ browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-	{ browser: 'other', visitors: 190, fill: 'var(--color-other)' },
+	{ group: 'year2030', employees: 435, fill: 'var(--color-year2030)' },
+	{ group: 'year3040', employees: 400, fill: 'var(--color-year3040)' },
+	{ group: 'year4040', employees: 225, fill: 'var(--color-year4040)' },
+	{ group: 'year50', employees: 100, fill: 'var(--color-year50)' },
 ];
 
 const chartConfig = {
-	visitors: {
-		label: 'Visitors',
+	employees: {
+		label: 'Employees',
 	},
-	chrome: {
-		label: 'Chrome',
+	year2030: {
+		label: '20-30 Years',
 		color: 'var(--chart-1)',
 	},
-	safari: {
-		label: 'Safari',
+	year3040: {
+		label: '30-40 Years',
 		color: 'var(--chart-2)',
 	},
-	firefox: {
-		label: 'Firefox',
+	year4040: {
+		label: '40-50 Years',
 		color: 'var(--chart-3)',
 	},
-	edge: {
-		label: 'Edge',
+	year50: {
+		label: '50+ Years',
 		color: 'var(--chart-4)',
-	},
-	other: {
-		label: 'Other',
-		color: 'var(--chart-5)',
 	},
 } satisfies ChartConfig;
 
-export function Widget1() {
+export function TotalEmployeesChart() {
 	const totalVisitors = React.useMemo(() => {
-		return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+		return chartData.reduce((acc, curr) => acc + curr.employees, 0);
 	}, []);
 
 	return (
-		<WidgetCard title='Pie Chart - Donut with Text'>
+		<WidgetCard title='Total Employees'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<PieChart>
 						<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-						<Pie data={chartData} dataKey='visitors' nameKey='browser' innerRadius={60} strokeWidth={5}>
+						<Pie data={chartData} dataKey='employees' nameKey='group' innerRadius={60} strokeWidth={5}>
 							<Label
 								content={({ viewBox }) => {
 									if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
@@ -61,7 +54,7 @@ export function Widget1() {
 													{totalVisitors.toLocaleString()}
 												</tspan>
 												<tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className='fill-muted-foreground'>
-													Visitors
+													Employees
 												</tspan>
 											</text>
 										);
@@ -69,6 +62,7 @@ export function Widget1() {
 								}}
 							/>
 						</Pie>
+						{/* <ChartLegend content={<ChartLegendContent />} /> */}
 					</PieChart>
 				</ResponsiveContainer>
 			</ChartContainer>

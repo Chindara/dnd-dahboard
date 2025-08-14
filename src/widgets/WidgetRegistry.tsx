@@ -1,4 +1,8 @@
-import { Widget1 } from './Widget1';
+import { AverageCheckInTile } from './AverageCheckInTile';
+import { AverageCheckOutTile } from './AverageCheckOutTile';
+import { AverageHoursTile } from './AverageHoursTile';
+import { OnTimeArrivalTile } from './OnTimeArrivalTile';
+import { TotalEmployeesChart } from './TotalEmployeesChart';
 import { Widget2 } from './Widget2';
 import { Widget3 } from './Widget3';
 import { Widget4 } from './Widget4';
@@ -8,19 +12,31 @@ import { Widget7 } from './Widget7';
 import { Widget8 } from './Widget8';
 
 // src/widgets/widgetRegistry.tsx
-export type WidgetKey = 'widget1' | 'widget2' | 'widget3' | 'widget4' | 'widget5' | 'widget6' | 'widget7' | 'widget8';
+export type WidgetKey =
+	| 'widget1'
+	| 'widget2'
+	| 'widget3'
+	| 'widget4'
+	| 'widget5'
+	| 'widget6'
+	| 'widget7'
+	| 'widget8'
+	| 'averageHours'
+	| 'averageCheckIn'
+	| 'averageCheckOut'
+	| 'onTimeArrival';
 
 export const widgetRegistry = {
 	widget1: {
 		id: 'widget1',
-		name: 'Pie Chart - Donut with Text',
-		description: 'Pie Chart - Donut with Text.',
+		name: 'Total Employees',
+		description: 'Total number of employees.',
 		image: '@/../src/assets/Widget1.png',
 		minW: 3,
 		minH: 4,
 		maxW: 3,
-		maxH: 4,
-		component: () => <Widget1 />,
+		maxH: 6,
+		component: () => <TotalEmployeesChart />,
 	},
 	widget2: {
 		id: 'widget2',
@@ -98,5 +114,53 @@ export const widgetRegistry = {
 		maxW: 4,
 		maxH: 4,
 		component: () => <Widget8 />,
+	},
+
+	averageHours: {
+		id: 'averageHours',
+		name: 'Average Hours Worked',
+		description: 'Average hours worked by employees.',
+		image: '@/../src/assets/Widget8.png',
+		minW: 2,
+		minH: 2,
+		maxW: 2,
+		maxH: 2,
+		component: () => <AverageHoursTile />,
+	},
+
+	averageCheckIn: {
+		id: 'averageCheckIn',
+		name: 'Average Check-In Time',
+		description: 'Average check-in time of employees.',
+		image: '@/../src/assets/Widget9.png',
+		minW: 2,
+		minH: 2,
+		maxW: 2,
+		maxH: 2,
+		component: () => <AverageCheckInTile />,
+	},
+
+	averageCheckOut: {
+		id: 'averageCheckOut',
+		name: 'Average Check-Out Time',
+		description: 'Average check-out time of employees.',
+		image: '@/../src/assets/Widget10.png',
+		minW: 2,
+		minH: 2,
+		maxW: 2,
+		maxH: 2,
+		component: () => <AverageCheckOutTile />,
+	},
+
+	onTimeArrival: {
+		id: 'onTimeArrival',
+		name: 'On-Time Arrival Rate',
+		description: 'On-time arrival rate of employees.',
+		image: '@/../src/assets/Widget11.png',
+		minW: 2,
+		minH: 2,
+		maxW: 2,
+		maxH: 2,
+		component: () => <OnTimeArrivalTile />,
 	},
 };
