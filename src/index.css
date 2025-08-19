@@ -92,7 +92,7 @@
 /* Grid Background Variables */
 @layer base {
 	:root {
-		--columns: 12;
+		--columns: 24;
 		--row-height: 75px;
 		--widget-gap: 4px; /* Gap between widgets - should match WIDGET_GAP in React */
 		--cell-gap: 2px; /* Small gap within cells for visual separation */

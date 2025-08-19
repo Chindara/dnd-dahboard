@@ -23,7 +23,7 @@ const STORAGE_KEY = 'dashboard-widgets';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const breakpoints = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 };
-const cols = { lg: 12, md: 2, sm: 6, xs: 4, xxs: 2 };
+const cols = { lg: 24, md: 4, sm: 12, xs: 8, xxs: 4 };
 
 const DashboardForm = () => {
 	const { width, ref } = useResizeDetector();
@@ -111,7 +111,7 @@ const DashboardForm = () => {
 			<div ref={ref} className='h-full w-full'>
 				{width && (
 					<ResponsiveGridLayout
-						className='layout grid-background'
+						className={cn('layout', editMode && 'grid-background')}
 						layouts={layouts}
 						verticalCompact={true}
 						breakpoints={breakpoints}
