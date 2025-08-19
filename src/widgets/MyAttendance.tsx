@@ -40,16 +40,16 @@ export function MyAttendance() {
 
 	return (
 		<WidgetCard title='My Attendance' footer='Better than 91.3% employees!'>
-			<div className='flex h-full'>
-				<div className='flex -mr-16'>
+			<div className='flex h-full gap-2'>
+				<div className='flex pr-2'>
 					<CustomChartLegend items={chartData.map((d) => ({ label: d.label, value: d.visitors, color: d.fill }))} width={32} />
 				</div>
 				<div className='flex'>
-					<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
+					<ChartContainer config={chartConfig} className='aspect-square w-full [&_.recharts-responsive-container]:!h-full'>
 						<ResponsiveContainer width='100%' height='100%'>
-							<PieChart>
+							<PieChart margin={{ left: 0, right: 0, top: 0, bottom: 0 }}>
 								<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-								<Pie data={chartData} dataKey='visitors' nameKey='browser' innerRadius={60} strokeWidth={8}>
+								<Pie data={chartData} dataKey='visitors' nameKey='browser' innerRadius='60%' outerRadius='90%' cx='50%' cy='50%' strokeWidth={8}>
 									<Label
 										content={({ viewBox }) => {
 											if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {

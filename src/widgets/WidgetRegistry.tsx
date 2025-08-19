@@ -14,7 +14,7 @@ import { Widget8 } from './Widget8';
 
 // src/widgets/widgetRegistry.tsx
 export type WidgetKey =
-	| 'widget1'
+	| 'totalEmployees'
 	| 'widget2'
 	| 'widget3'
 	| 'widget4'
@@ -29,14 +29,14 @@ export type WidgetKey =
 	| 'myAttendance';
 
 export const widgetRegistry = {
-	widget1: {
-		id: 'widget1',
+	totalEmployees: {
+		id: 'totalEmployees',
 		name: 'Total Employees',
 		description: 'Total number of employees.',
 		image: '@/../src/assets/Widget1.png',
-		minW: 3,
-		minH: 4,
-		maxW: 3,
+		minW: 1,
+		minH: 2,
+		maxW: 4,
 		maxH: 6,
 		component: () => <TotalEmployeesChart />,
 	},

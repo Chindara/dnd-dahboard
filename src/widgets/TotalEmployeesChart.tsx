@@ -44,7 +44,7 @@ export function TotalEmployeesChart() {
 				<ResponsiveContainer width='100%' height='100%'>
 					<PieChart>
 						<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-						<Pie data={chartData} dataKey='employees' nameKey='group' innerRadius={60} strokeWidth={5}>
+						<Pie data={chartData} dataKey='employees' nameKey='group' innerRadius='60%' outerRadius='90%' cx='50%' cy='50%' strokeWidth={8}>
 							<Label
 								content={({ viewBox }) => {
 									if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {

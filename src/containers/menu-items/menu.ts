@@ -48,7 +48,7 @@ export const menuItems = {
 	projects: [
 		{
 			name: 'Dashboard',
-			url: 'dashboard',
+			url: 'dashboard2',
 			icon: Frame,
 		},
 

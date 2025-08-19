@@ -111,13 +111,15 @@ const DashboardForm = () => {
 			<div ref={ref} className='h-full w-full'>
 				{width && (
 					<ResponsiveGridLayout
-						className='layout'
+						className='layout grid-background'
 						layouts={layouts}
 						verticalCompact={true}
 						breakpoints={breakpoints}
 						cols={cols}
 						rowHeight={75}
 						width={width - 32}
+						margin={[0, 0]}
+						containerPadding={[0, 0]}
 						isDraggable={editMode}
 						isResizable={editMode}
 						draggableCancel='.widget-delete-btn'
