@@ -89,39 +89,49 @@
 	}
 }
 
+/* Grid Background Variables */
 @layer base {
 	:root {
 		--columns: 12;
 		--row-height: 75px;
-		--gap: 4px; /* Gap between cells - adjust as needed */
-		--line-color: oklch(0.957 0.0058 264.53); /* light mode default */
-		--cell-color: oklch(0.7938 0 0); /* Red color for cells */
+		--widget-gap: 4px; /* Gap between widgets - should match WIDGET_GAP in React */
+		--cell-gap: 2px; /* Small gap within cells for visual separation */
+		--cell-color: oklch(0.628 0.258 25); /* Red color for cells */
 		--cell-opacity: 0.1; /* Opacity for cell coloring in light mode */
 	}
 
 	.dark {
-		--line-color: oklch(0.25 0.0149 259.82); /* dark mode color */
-		--cell-color: oklch(0.3427 0 0); /* Darker red for dark mode */
+		--cell-color: oklch(0.5 0.2 25); /* Darker red for dark mode */
 		--cell-opacity: 0.15; /* Slightly higher opacity in dark mode */
 	}
 }
 
+/* Main grid background with widget gaps */
 .grid-background {
 	width: 100%;
 	height: 100%;
-	background-color: var(--background); /* Use theme background */
-	background-image: repeating-linear-gradient(
-			0deg,
-			oklch(from var(--cell-color) l c h / var(--cell-opacity)) 0px,
-			oklch(from var(--cell-color) l c h / var(--cell-opacity)) calc(var(--row-height) - var(--gap)),
-			transparent calc(var(--row-height) - var(--gap)),
-			transparent var(--row-height)
-		),
+	background-color: var(--background);
+
+	/* Create grid cells with gaps between widgets */
+	background-image: 
+		/* Horizontal lines (rows) */
 		repeating-linear-gradient(
-			90deg,
-			oklch(from var(--cell-color) l c h / var(--cell-opacity)) 0px,
-			oklch(from var(--cell-color) l c h / var(--cell-opacity)) calc((100% / var(--columns)) - var(--gap)),
-			transparent calc((100% / var(--columns)) - var(--gap)),
-			transparent calc(100% / var(--columns))
-		);
+			0deg,
+			transparent 0,
+			transparent var(--cell-gap),
+			oklch(from var(--cell-color) l c h / var(--cell-opacity)) var(--cell-gap),
+			oklch(from var(--cell-color) l c h / var(--cell-opacity)) var(--row-height),
+			transparent var(--row-height),
+			transparent calc(var(--row-height) + var(--widget-gap))
+		),
+		/* Vertical lines (columns) */
+			repeating-linear-gradient(
+				90deg,
+				transparent 0,
+				transparent var(--cell-gap),
+				oklch(from var(--cell-color) l c h / var(--cell-opacity)) var(--cell-gap),
+				oklch(from var(--cell-color) l c h / var(--cell-opacity)) calc((100% - (var(--columns) - 1) * var(--widget-gap)) / var(--columns)),
+				transparent calc((100% - (var(--columns) - 1) * var(--widget-gap)) / var(--columns)),
+				transparent calc((100% - (var(--columns) - 1) * var(--widget-gap)) / var(--columns) + var(--widget-gap))
+			);
 }

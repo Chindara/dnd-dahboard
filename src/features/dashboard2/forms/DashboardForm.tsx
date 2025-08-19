@@ -118,7 +118,7 @@ const DashboardForm = () => {
 						cols={cols}
 						rowHeight={75}
 						width={width - 32}
-						margin={[0, 0]}
+						margin={[4, 4]}
 						containerPadding={[0, 0]}
 						isDraggable={editMode}
 						isResizable={editMode}
@@ -150,7 +150,7 @@ const DashboardForm = () => {
 						{dashboardWidgets.map((w) => {
 							const WidgetComponent = widgetRegistry[w.widgetKey].component;
 							return (
-								<div key={w.key} className='relative'>
+								<div key={w.key} className='relative widget-container'>
 									{editMode && (
 										<Button
 											className='widget-delete-btn absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white z-50 h-6 w-6 p-0'
