@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { WidgetKey, widgetRegistry } from '@/widgets/WidgetRegistry';
+import { WidgetSheet } from '@/components/WidgetSheet'; // Import the new component
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useResizeDetector } from 'react-resize-detector';
@@ -28,11 +28,10 @@ const cols = { lg: 12, md: 2, sm: 6, xs: 4, xxs: 2 };
 const DashboardForm = () => {
 	const { width, ref } = useResizeDetector();
 	const [dashboardWidgets, setDashboardWidgets] = useState<DashboardWidget[]>([]);
-	const [selectedWidgetKey, setSelectedWidgetKey] = useState<WidgetKey | null>(null);
 	const [editMode, setEditMode] = useState(false);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
-	// 🔹 Load from localStorage on mount
+	// Load from localStorage on mount
 	useEffect(() => {
 		const saved = localStorage.getItem(STORAGE_KEY);
 		if (saved) {
@@ -63,7 +62,7 @@ const DashboardForm = () => {
 		setDashboardWidgets((prev) => prev.filter((w) => w.key !== key));
 	};
 
-	// 🔹 Save to localStorage when Done is clicked
+	// Save to localStorage when Done is clicked
 	const handleDone = () => {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(dashboardWidgets));
 		setEditMode(false);
@@ -171,50 +170,8 @@ const DashboardForm = () => {
 				)}
 			</div>
 
-			{/* Right-Side Widget Library */}
-			<Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
-				<SheetContent side='right' className='w-[400px] flex flex-col bg-white dark:bg-gray-900'>
-					<SheetHeader>
-						<SheetTitle>Add Widgets</SheetTitle>
-					</SheetHeader>
-					<SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
-					<div className='space-y-1 overflow-y-auto flex-1'>
-						{Object.entries(widgetRegistry).map(([key, widget]) => (
-							<div
-								key={key}
-								onClick={() => setSelectedWidgetKey(key as WidgetKey)}
-								className={cn(
-									'flex gap-2 items-start p-2 rounded-sm cursor-pointer transition',
-									selectedWidgetKey === key ? 'bg-blue-100 dark:bg-blue-900/40 border-l-4 border-blue-500' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-								)}
-							>
-								<div className='w-1/3 aspect-square'>
-									<img src={widget.image} alt={widget.name} className='w-full h-full object-cover rounded' />
-								</div>
-								<div className='w-2/3'>
-									<h4 className='text-sm font-semibold text-gray-900 dark:text-gray-100'>{widget.name}</h4>
-									<p className='text-sm text-gray-600 dark:text-gray-400'>{widget.description}</p>
-								</div>
-							</div>
-						))}
-					</div>
-
-					<div className='pt-4 border-t mt-4'>
-						<Button
-							className='w-full'
-							disabled={!selectedWidgetKey}
-							onClick={() => {
-								if (selectedWidgetKey) {
-									handleAddWidget(selectedWidgetKey);
-									setSelectedWidgetKey(null);
-								}
-							}}
-						>
-							Add Widget
-						</Button>
-					</div>
-				</SheetContent>
-			</Sheet>
+			{/* Widget Sheet Component */}
+			<WidgetSheet open={drawerOpen} onOpenChange={setDrawerOpen} onAddWidget={handleAddWidget} />
 		</div>
 	);
 };
