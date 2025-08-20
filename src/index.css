@@ -96,12 +96,12 @@
 		--row-height: 75px;
 		--widget-gap: 4px; /* Gap between widgets - should match WIDGET_GAP in React */
 		--cell-gap: 2px; /* Small gap within cells for visual separation */
-		--cell-color: oklch(0.92 0 0); /* Red color for cells */
+		--cell-color: oklch(0.87 0 0); /* Red color for cells */
 		--cell-opacity: 0.1; /* Opacity for cell coloring in light mode */
 	}
 
 	.dark {
-		--cell-color: oklch(0.27 0 0); /* Darker red for dark mode */
+		--cell-color: oklch(0.37 0 0); /* Darker red for dark mode */
 		--cell-opacity: 0.15; /* Slightly higher opacity in dark mode */
 	}
 }
