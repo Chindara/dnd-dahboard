@@ -3,6 +3,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '
 import { WidgetCard } from './WidgetCard';
 import React, { useMemo } from 'react';
 import { CustomChartLegend } from '@/components/CustomChartLegend';
+import { CheckCircle } from 'lucide-react';
 
 const chartData = [
 	{ browser: 'ontime', visitors: 1031, fill: 'var(--chart-2)', label: 'On-Time' },
@@ -39,7 +40,15 @@ export function MyAttendance() {
 	}, []);
 
 	return (
-		<WidgetCard title='My Attendance' footer='Better than 91.3% employees!'>
+		<WidgetCard
+			title='My Attendance'
+			footer={
+				<>
+					<CheckCircle className='h-4 w-4 text-green-700' />
+					<span className='text-sm text-foreground'>Better than 91.3% employees!</span>
+				</>
+			}
+		>
 			<div className='flex h-full gap-2'>
 				<div className='flex pr-2'>
 					<CustomChartLegend items={chartData.map((d) => ({ label: d.label, value: d.visitors, color: d.fill }))} width={32} />

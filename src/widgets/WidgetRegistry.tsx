@@ -170,7 +170,7 @@ export const widgetRegistry = {
 		id: 'myAttendance',
 		name: 'My Attendance',
 		description: 'View my attendance details.',
-		image: '@/../src/assets/Widget12.png',
+		image: '@/../src/assets/MyAttendance.png',
 		minW: 3,
 		minH: 4,
 		maxW: 3,
