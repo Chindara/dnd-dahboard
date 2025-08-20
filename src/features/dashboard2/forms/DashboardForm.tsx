@@ -8,6 +8,9 @@ import { WidgetSheet } from '@/components/WidgetSheet'; // Import the new compon
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useResizeDetector } from 'react-resize-detector';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 
 type DashboardWidget = {
 	key: string;
@@ -16,6 +19,11 @@ type DashboardWidget = {
 	h: number;
 	x: number;
 	y: number;
+};
+
+type Tab = {
+	id: string;
+	label: string;
 };
 
 const STORAGE_KEY = 'dashboard-widgets';
@@ -30,6 +38,20 @@ const DashboardForm = () => {
 	const [dashboardWidgets, setDashboardWidgets] = useState<DashboardWidget[]>([]);
 	const [editMode, setEditMode] = useState(false);
 	const [drawerOpen, setDrawerOpen] = useState(false);
+	const [tabs, setTabs] = useState<Tab[]>([{ id: 'tab1', label: 'Tab 1' }]);
+	const [activeTab, setActiveTab] = useState('tab1');
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const [newTabLabel, setNewTabLabel] = useState('');
+
+	const handleAddTab = () => {
+		if (!newTabLabel.trim()) return;
+
+		const newId = `panel-${Date.now()}`;
+		setTabs([...tabs, { id: newId, label: newTabLabel }]);
+		setActiveTab(newId);
+		setIsDialogOpen(false);
+		setNewTabLabel('');
+	};
 
 	// Load from localStorage on mount
 	useEffect(() => {
@@ -92,6 +114,25 @@ const DashboardForm = () => {
 			{/* Header */}
 			<div className='p-4 border-b flex justify-between items-center'>
 				<h2 className='text-xl font-semibold'>My Dashboard</h2>
+			</div>
+
+			<div className='flex justify-between border-red-600'>
+				<Tabs value={activeTab} onValueChange={setActiveTab}>
+					<TabsList>
+						{tabs.map((tab) => (
+							<TabsTrigger key={tab.id} value={tab.id}>
+								{tab.label}
+							</TabsTrigger>
+						))}
+						<Button variant='outline' size='sm' className='ml-2' onClick={() => setIsDialogOpen(true)}>
+							+ New Dashboard
+						</Button>
+					</TabsList>
+
+					{tabs.map((tab) => (
+						<TabsContent key={tab.id} value={tab.id}></TabsContent>
+					))}
+				</Tabs>
 				<Button
 					onClick={
 						editMode
@@ -105,6 +146,24 @@ const DashboardForm = () => {
 					{editMode ? 'Done' : 'Edit'}
 				</Button>
 			</div>
+
+			{/* Popup Dialog */}
+			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>Add New Tab</DialogTitle>
+					</DialogHeader>
+					<div className='space-y-4'>
+						<Input placeholder='Tab name' value={newTabLabel} onChange={(e) => setNewTabLabel(e.target.value)} />
+					</div>
+					<DialogFooter>
+						<Button variant='outline' onClick={() => setIsDialogOpen(false)}>
+							Cancel
+						</Button>
+						<Button onClick={handleAddTab}>Add</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 
 			{/* Dashboard Grid */}
 			<div ref={ref} className='h-full w-full mt-2'>
