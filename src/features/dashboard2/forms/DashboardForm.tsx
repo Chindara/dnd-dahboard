@@ -32,7 +32,7 @@ const DashboardForm = () => {
 	const [editMode, setEditMode] = useState(false);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
-	const [dashboardTabs, setDashboardTabs] = useState<DashboardTab[]>([{ id: 'panel1', label: 'Panel 1', widgets: [] }]);
+	const [dashboardTabs, setDashboardTabs] = useState<DashboardTab[]>([{ id: 'panel1', label: 'WorkHub Overview', widgets: [] }]);
 	const [activeTab, setActiveTab] = useState('panel1');
 	const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
