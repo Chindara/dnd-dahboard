@@ -19,6 +19,7 @@ export default function TabDialog({ open, onOpenChange, title, defaultValue = ''
 	}, [defaultValue]);
 
 	const handleSave = () => {
+		console.log('Saving tab:', inputValue);
 		if (!inputValue.trim()) return;
 		onSave(inputValue);
 		setInputValue('');

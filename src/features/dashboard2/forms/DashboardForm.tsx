@@ -44,13 +44,20 @@ const DashboardForm = () => {
 		setDashboardTabs([...dashboardTabs, newTab]);
 		setActiveTab(newTab.id);
 		setIsAddDialogOpen(false);
+		handleDone();
 	};
 
-	const handleRenameTab = (label: string) => {
-		setDashboardTabs((prev) => prev.map((tab) => (tab.id === activeTab ? { ...tab, label } : tab)));
+	const handleRenameTab = (newLabel: string) => {
+		console.log('Renaming tab:', activeTab, 'to', newLabel);
+		//setDashboardTabs((prev) => prev.map((tab) => (tab.id === activeTab ? { ...tab, label: newLabel } : tab)));
 
+		const updated = dashboardTabs.map((t) => (t.id === activeTab ? { ...t, label: newLabel } : t));
+		setDashboardTabs(updated);
+		console.log('Current dashboard tabs:', updated);
 		setIsRenameDialogOpen(false);
 		setRenameTabLabel('');
+
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
 	};
 
 	// Open rename dialog for a specific tab
@@ -93,6 +100,8 @@ const DashboardForm = () => {
 
 	// Save to localStorage when Done is clicked
 	const handleDone = () => {
+		console.log('Saving dashboard tabs to localStorage:', dashboardTabs);
+
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(dashboardTabs));
 		setEditMode(false);
 		setDrawerOpen(false);
@@ -116,16 +125,16 @@ const DashboardForm = () => {
 				<Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
 					<TabsList>
 						{dashboardTabs.map((tab) => (
-							<div key={tab.id} className='flex items-center gap-1'>
-								<TabsTrigger key={tab.id} value={tab.id}>
+							<TabsTrigger key={tab.id} value={tab.id}>
+								<div key={tab.id} className='flex items-center gap-2'>
 									{tab.label}
-								</TabsTrigger>
-								{tab.id === activeTab && (
-									<Button variant='ghost' size='icon' className='h-6 w-6' onClick={() => openRenameDialog(tab)}>
-										<Pencil className='h-4 w-4' />
-									</Button>
-								)}
-							</div>
+									{tab.id === activeTab && (
+										<Button variant='ghost' size='icon' className='size-6' onClick={() => openRenameDialog(tab)}>
+											<Pencil className='size-4' />
+										</Button>
+									)}
+								</div>
+							</TabsTrigger>
 						))}
 						<Button variant='outline' size='sm' className='ml-2' onClick={() => setIsAddDialogOpen(true)}>
 							➕ Add Dashboard

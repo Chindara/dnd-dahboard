@@ -15,22 +15,28 @@ const chartData = [
 	{ month: 'April', desktop: 73, mobile: 190 },
 	{ month: 'May', desktop: 209, mobile: 130 },
 	{ month: 'June', desktop: 214, mobile: 140 },
+	{ month: 'July', desktop: 186, mobile: 80 },
+	{ month: 'August', desktop: 305, mobile: 200 },
+	{ month: 'September', desktop: 237, mobile: 120 },
+	{ month: 'October', desktop: 73, mobile: 190 },
+	{ month: 'November', desktop: 209, mobile: 130 },
+	{ month: 'December', desktop: 214, mobile: 140 },
 ];
 
 const chartConfig = {
 	desktop: {
 		label: 'Desktop',
-		color: 'var(--chart-1)',
+		color: 'var(--chart-2)',
 	},
 	mobile: {
 		label: 'Mobile',
-		color: 'var(--chart-2)',
+		color: 'var(--chart-4)',
 	},
 } satisfies ChartConfig;
 
 export function Widget2() {
 	return (
-		<WidgetCard title='Avg. Energy Consumption' count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)} unit='kWh'>
+		<WidgetCard title='Revenue' count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)} unit='rupees'>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart accessibilityLayer data={chartData}>

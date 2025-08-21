@@ -42,7 +42,7 @@ export function WidgetCard({ title, count, unit, children, footer }: WidgetCardP
 	}, []);
 
 	return (
-		<Card ref={cardRef} className='flex flex-col h-full w-full p-0' data-size-mode={sizeMode}>
+		<Card ref={cardRef} className='flex flex-col h-full w-full p-0 bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800' data-size-mode={sizeMode}>
 			{sizeMode !== 'small' && (
 				<CardHeader className='pb-0 flex flex-col items-start mb-2'>
 					<CardTitle className='text-xl md:text-lg'>{title}</CardTitle>
