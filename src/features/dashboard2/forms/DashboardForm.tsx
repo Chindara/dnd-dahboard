@@ -7,8 +7,8 @@ import { WidgetSheet } from '@/components/WidgetSheet'; // Import the new compon
 import { useResizeDetector } from 'react-resize-detector';
 import { DashboardGrid } from '../components/DashboardGrid';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+import TabDialog from '../components/TabDialog';
+import { Pencil } from 'lucide-react';
 
 type DashboardWidget = {
 	key: string;
@@ -34,17 +34,30 @@ const DashboardForm = () => {
 
 	const [dashboardTabs, setDashboardTabs] = useState<DashboardTab[]>([{ id: 'panel1', label: 'Panel 1', widgets: [] }]);
 	const [activeTab, setActiveTab] = useState('panel1');
-	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [newTabLabel, setNewTabLabel] = useState('');
+	const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
+	const [renameTabLabel, setRenameTabLabel] = useState('');
 
-	const handleAddTab = () => {
-		if (!newTabLabel.trim()) return;
+	const handleAddTab = (label: string) => {
+		if (!label.trim()) return;
+		const newTab: DashboardTab = { id: `panel-${Date.now()}`, label, widgets: [] };
+		setDashboardTabs([...dashboardTabs, newTab]);
+		setActiveTab(newTab.id);
+		setIsAddDialogOpen(false);
+	};
 
-		const newId = `panel-${Date.now()}`;
-		setDashboardTabs([...dashboardTabs, { id: newId, label: newTabLabel, widgets: [] }]);
-		setActiveTab(newId);
-		setIsDialogOpen(false);
-		setNewTabLabel('');
+	const handleRenameTab = (label: string) => {
+		setDashboardTabs((prev) => prev.map((tab) => (tab.id === activeTab ? { ...tab, label } : tab)));
+
+		setIsRenameDialogOpen(false);
+		setRenameTabLabel('');
+	};
+
+	// Open rename dialog for a specific tab
+	const openRenameDialog = (tab: DashboardTab) => {
+		setRenameTabLabel(tab.label);
+		setActiveTab(tab.id); // make it active if not already
+		setIsRenameDialogOpen(true);
 	};
 
 	// Load from localStorage on mount
@@ -103,12 +116,19 @@ const DashboardForm = () => {
 				<Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
 					<TabsList>
 						{dashboardTabs.map((tab) => (
-							<TabsTrigger key={tab.id} value={tab.id}>
-								{tab.label}
-							</TabsTrigger>
+							<div key={tab.id} className='flex items-center gap-1'>
+								<TabsTrigger key={tab.id} value={tab.id}>
+									{tab.label}
+								</TabsTrigger>
+								{tab.id === activeTab && (
+									<Button variant='ghost' size='icon' className='h-6 w-6' onClick={() => openRenameDialog(tab)}>
+										<Pencil className='h-4 w-4' />
+									</Button>
+								)}
+							</div>
 						))}
-						<Button variant='outline' size='sm' className='ml-2' onClick={() => setIsDialogOpen(true)}>
-							+ Add Tab
+						<Button variant='outline' size='sm' className='ml-2' onClick={() => setIsAddDialogOpen(true)}>
+							➕ Add Dashboard
 						</Button>
 					</TabsList>
 
@@ -135,23 +155,11 @@ const DashboardForm = () => {
 				</Button>
 			</div>
 
-			{/* Popup Dialog */}
-			<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle>Add New Tab</DialogTitle>
-					</DialogHeader>
-					<div className='space-y-4'>
-						<Input placeholder='Tab name' value={newTabLabel} onChange={(e) => setNewTabLabel(e.target.value)} />
-					</div>
-					<DialogFooter>
-						<Button variant='outline' onClick={() => setIsDialogOpen(false)}>
-							Cancel
-						</Button>
-						<Button onClick={handleAddTab}>Add</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
+			{/* Add Tab Dialog */}
+			<TabDialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen} title='Add New Dashboard' onSave={handleAddTab} />
+
+			{/* Rename Tab Dialog */}
+			<TabDialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen} title='Rename Dashboard' defaultValue={renameTabLabel} onSave={handleRenameTab} />
 
 			{/* Widget Sheet Component */}
 			<WidgetSheet open={drawerOpen} onOpenChange={setDrawerOpen} onAddWidget={handleAddWidget} />
