@@ -2,28 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { WidgetKey, widgetRegistry } from '@/widgets/WidgetRegistry';
+import { widgetRegistry } from '@/widgets/WidgetRegistry';
 import { WidgetSheet } from '@/components/WidgetSheet'; // Import the new component
 import { useResizeDetector } from 'react-resize-detector';
 import { DashboardGrid } from '../components/DashboardGrid';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TabDialog from '../components/TabDialog';
 import { Pencil } from 'lucide-react';
-
-type DashboardWidget = {
-	key: string;
-	widgetKey: WidgetKey;
-	w: number;
-	h: number;
-	x: number;
-	y: number;
-};
-
-type DashboardTab = {
-	id: string;
-	label: string;
-	widgets: DashboardWidget[];
-};
+import { DashboardTab, DashboardWidget, WidgetKey } from '@/types/DashboardWidget';
 
 const STORAGE_KEY = 'dashboard-widgets';
 

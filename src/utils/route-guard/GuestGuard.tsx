@@ -1,8 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 
-// ==============================|| GUEST GUARD ||============================== //
-
 const GuestGuard = ({ children }: { children: React.ReactNode }) => {
 	const navigate = useNavigate();
 	const isLoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -11,7 +9,7 @@ const GuestGuard = ({ children }: { children: React.ReactNode }) => {
 		if (!isLoggedIn) return () => navigate('/login', { replace: true });
 
 		if (isLoggedIn) {
-			return () => navigate('/dashboard2', { replace: true });
+			return () => navigate('/dashboard', { replace: true });
 		}
 	}, [isLoggedIn, navigate]);
 

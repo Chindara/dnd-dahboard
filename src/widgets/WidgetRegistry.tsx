@@ -1,3 +1,4 @@
+import { WidgetGroup, WidgetKey } from '@/types/DashboardWidget';
 import { AverageCheckInTile } from './AverageCheckInTile';
 import { AverageCheckOutTile } from './AverageCheckOutTile';
 import { AverageHoursTile } from './AverageHoursTile';
@@ -14,23 +15,6 @@ import { Widget7 } from './Widget7';
 import { Widget8 } from './Widget8';
 
 // src/widgets/widgetRegistry.tsx
-export type WidgetKey =
-	| 'totalEmployees'
-	| 'widget2'
-	| 'widget3'
-	| 'widget4'
-	| 'widget5'
-	| 'widget6'
-	| 'widget7'
-	| 'widget8'
-	| 'averageHours'
-	| 'averageCheckIn'
-	| 'averageCheckOut'
-	| 'onTimeArrival'
-	| 'myAttendance'
-	| 'totalSolarSales';
-
-export type WidgetGroup = 'Analytics' | 'Charts' | 'Attendance' | 'Personal' | 'Sales';
 
 export interface WidgetConfig {
 	id: string;

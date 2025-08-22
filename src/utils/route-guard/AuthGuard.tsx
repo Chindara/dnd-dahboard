@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-// ==============================|| AUTH GUARD ||============================== //
-
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
 	const isLoggedIn = sessionStorage.getItem('isLoggedIn');
 	const navigate = useNavigate();
