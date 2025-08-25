@@ -1,7 +1,7 @@
 import DashboardForm from '../forms/DashboardForm';
 
-const Dashboard2Module = () => {
+const DashboardModule = () => {
 	return <DashboardForm />;
 };
 
-export default Dashboard2Module;
+export default DashboardModule;

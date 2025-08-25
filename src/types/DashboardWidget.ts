@@ -30,3 +30,21 @@ export type WidgetKey =
 	| 'totalSolarSales';
 
 export type WidgetGroup = 'Analytics' | 'Charts' | 'Attendance' | 'Personal' | 'Sales';
+
+export type LayoutOrientation = 'horizontal' | 'vertical';
+
+export type OrgNodeData = {
+	image: string;
+	name: string;
+	designation: string;
+	department: string;
+};
+
+export type Employee = {
+	id: string;
+	name: string;
+	designation: string;
+	department: string;
+	image: string;
+	managerId: string | null;
+};

@@ -1,4 +1,4 @@
-import { AudioWaveform, Command, Frame, GalleryVerticalEnd, SquareTerminal } from 'lucide-react';
+import { AudioWaveform, Building2, Command, Frame, GalleryVerticalEnd, LayoutDashboard, SquareTerminal } from 'lucide-react';
 
 export const menuItems = {
 	user: {
@@ -48,8 +48,13 @@ export const menuItems = {
 	projects: [
 		{
 			name: 'Dashboard',
-			url: 'dashboard2',
-			icon: Frame,
+			url: 'dashboard',
+			icon: LayoutDashboard,
+		},
+		{
+			name: 'Hierarchy',
+			url: 'hierarchy',
+			icon: Building2,
 		},
 
 		// {

@@ -1,0 +1,34 @@
+[
+	{
+		"id": "1",
+		"name": "T Baheerathan",
+		"designation": "Director/General Manager",
+		"department": "Administration",
+		"image": "https://i.pravatar.cc/100?img=1",
+		"managerId": null
+	},
+	{
+		"id": "2",
+		"name": "Chinthaka Bandara",
+		"designation": "Department Manager",
+		"department": "Software Development B",
+		"image": "https://i.pravatar.cc/100?img=2",
+		"managerId": "1"
+	},
+	{
+		"id": "3",
+		"name": "Kasun Udayanga",
+		"designation": "Associate Software Engineer",
+		"department": "Software Development B",
+		"image": "https://i.pravatar.cc/100?img=3",
+		"managerId": "2"
+	},
+	{
+		"id": "4",
+		"name": "Prabod Hemachandra",
+		"designation": "Software Engineer",
+		"department": "Software Development B",
+		"image": "https://i.pravatar.cc/100?img=4",
+		"managerId": "2"
+	}
+]
