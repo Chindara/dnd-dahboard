@@ -9,8 +9,8 @@ type OrgCardProps = {
 
 export default function OrgCard({ data, orientation }: OrgCardProps) {
 	// Determine handle positions based on orientation
-	const targetPosition = orientation === 'horizontal' ? Position.Left : Position.Top;
-	const sourcePosition = orientation === 'horizontal' ? Position.Right : Position.Bottom;
+	const targetPosition = Position.Top;
+	const sourcePosition = Position.Bottom;
 
 	// Adjust handle styles based on orientation
 	const getTargetHandleStyle = () => {
@@ -67,7 +67,7 @@ export default function OrgCard({ data, orientation }: OrgCardProps) {
 						<div className='flex-col col-span-3'>
 							<p className='text-md font-semibold text-gray-900 truncate'>{data.name}</p>
 							<p className='text-xs text-gray-600 truncate'>{data.designation}</p>
-							<p className='text-xs text-gray-500 truncate'>{data.department}</p>
+							{/* <p className='text-xs text-gray-500 truncate'>{data.department}</p> */}
 						</div>
 					</div>
 				</CardContent>

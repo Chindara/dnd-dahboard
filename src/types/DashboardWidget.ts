@@ -31,8 +31,6 @@ export type WidgetKey =
 
 export type WidgetGroup = 'Analytics' | 'Charts' | 'Attendance' | 'Personal' | 'Sales';
 
-export type LayoutOrientation = 'horizontal' | 'vertical';
-
 export type OrgNodeData = {
 	image: string;
 	name: string;

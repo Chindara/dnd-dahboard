@@ -3,7 +3,7 @@ import OrgChart from '../components/OrgChart';
 
 const backendData = [
 	{ id: '1', name: 'Bahee', designation: 'Director/General Manager', department: 'Administration', image: 'https://i.pravatar.cc/100?img=1', managerId: null },
-	{ id: '2', name: 'Manju', designation: 'General Manager', department: 'Business Unit 1', image: 'https://i.pravatar.cc/100?img=2', managerId: '1' },
+	{ id: '2', name: 'Manju', designation: 'General Manager', department: 'Division 2 / Data Center 1 / DC-Admin', image: 'https://i.pravatar.cc/100?img=2', managerId: '1' },
 	{ id: '3', name: 'Suraweera', designation: 'Ass. General Manager', department: 'Business Unit 1', image: 'https://i.pravatar.cc/100?img=3', managerId: '2' },
 	{ id: '4', name: 'Sidesh', designation: 'Department Manager', department: 'Product Engineering 4', image: 'https://i.pravatar.cc/100?img=4', managerId: '3' },
 	{ id: '5', name: 'Devinda', designation: 'Team Leader', department: 'Product Engineering 4', image: 'https://i.pravatar.cc/100?img=5', managerId: '4' },
@@ -41,10 +41,11 @@ const backendData = [
 	{ id: '37', name: 'Janika', designation: 'Quality Engineer', department: 'Software Development A', image: 'https://i.pravatar.cc/100?img=37', managerId: '32' },
 	{ id: '38', name: 'Tharindu', designation: 'Quality Engineer', department: 'Software Development A', image: 'https://i.pravatar.cc/100?img=38', managerId: '32' },
 	{ id: '39', name: 'Dulan', designation: 'Team Leader', department: 'Data Center 1', image: 'https://i.pravatar.cc/100?img=39', managerId: '3' },
+	{ id: '40', name: 'Saman', designation: 'Team Leader', department: 'Data Center 1', image: 'https://i.pravatar.cc/100?img=40', managerId: '39' },
 ];
 
 function HierarchyForm() {
-	return <OrgChart employees={backendData} orientation='vertical' />;
+	return <OrgChart employees={backendData} />;
 }
 
 export default HierarchyForm;

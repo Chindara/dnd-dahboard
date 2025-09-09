@@ -2,21 +2,20 @@ import { useMemo } from 'react';
 import ReactFlow, { Controls, Node, Edge, Position, ConnectionLineType, MarkerType } from 'reactflow';
 import 'reactflow/dist/style.css';
 import dagre from 'dagre';
-import { Employee, LayoutOrientation } from '@/types/DashboardWidget';
+import { Employee } from '@/types/DashboardWidget';
 import OrgCard from './OrgCard';
 
 // Layout configuration
 const nodeWidth = 240;
 const nodeHeight = 90;
+const nodeSep = 20; // Increased gap between nodes
+const rankSep = 40; // Increased gap between levels
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-function getLayoutedElements(nodes: Node[], edges: Edge[], orientation: LayoutOrientation) {
-	console.log('getLayoutedElements:', orientation);
-	// Changed from 'TB' to 'LR' for left-to-right layout
-	const rankdir = orientation === 'horizontal' ? 'LR' : 'TB';
-	dagreGraph.setGraph({ rankdir, nodesep: 60, ranksep: 120 });
+function getLayoutedElements(nodes: Node[], edges: Edge[]) {
+	dagreGraph.setGraph({ rankdir: 'TB', nodesep: nodeSep, ranksep: rankSep });
 
 	nodes.forEach((node) => {
 		dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
@@ -40,7 +39,7 @@ function getLayoutedElements(nodes: Node[], edges: Edge[], orientation: LayoutOr
 }
 
 // OrgChart Component
-export default function OrgChart({ employees, orientation }: { employees: Employee[]; orientation: LayoutOrientation }) {
+export default function OrgChart({ employees }: { employees: Employee[] }) {
 	const nodeTypes = useMemo(
 		() => ({
 			orgNode: ({ data }: { data: Employee }) => <OrgCard data={data} />,
@@ -83,7 +82,7 @@ export default function OrgChart({ employees, orientation }: { employees: Employ
 				},
 			}));
 
-		return getLayoutedElements(nodes, edges, orientation);
+		return getLayoutedElements(nodes, edges);
 	}, [employees]);
 
 	// Default edge options to ensure edges are visible
