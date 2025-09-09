@@ -4,59 +4,34 @@ import { Employee } from '@/types/DashboardWidget';
 
 type OrgCardProps = {
 	data: Employee;
-	orientation?: 'horizontal' | 'vertical';
 };
 
-export default function OrgCard({ data, orientation }: OrgCardProps) {
-	// Determine handle positions based on orientation
-	const targetPosition = Position.Top;
-	const sourcePosition = Position.Bottom;
-
+export default function OrgCard({ data }: OrgCardProps) {
 	// Adjust handle styles based on orientation
 	const getTargetHandleStyle = () => {
-		if (orientation === 'horizontal') {
-			return {
-				background: '#64748b',
-				width: 10,
-				height: 10,
-				border: '2px solid #fff',
-				left: -5,
-			};
-		} else {
-			return {
-				background: '#64748b',
-				width: 10,
-				height: 10,
-				border: '2px solid #fff',
-				top: -5,
-			};
-		}
+		return {
+			background: '#64748b',
+			width: 10,
+			height: 10,
+			border: '2px solid #fff',
+			top: -5,
+		};
 	};
 
 	const getSourceHandleStyle = () => {
-		if (orientation === 'horizontal') {
-			return {
-				background: '#64748b',
-				width: 10,
-				height: 10,
-				border: '2px solid #fff',
-				right: -5,
-			};
-		} else {
-			return {
-				background: '#64748b',
-				width: 10,
-				height: 10,
-				border: '2px solid #fff',
-				bottom: -5,
-			};
-		}
+		return {
+			background: '#64748b',
+			width: 10,
+			height: 10,
+			border: '2px solid #fff',
+			bottom: -5,
+		};
 	};
 
 	return (
 		<div className='relative'>
 			{/* Input Handle - Only show if employee has a manager */}
-			{data.managerId && <Handle type='target' position={targetPosition} id='target' style={getTargetHandleStyle()} />}
+			{data.managerId && <Handle type='target' position={Position.Top} id='target' style={getTargetHandleStyle()} />}
 
 			<Card className='shadow-lg rounded-lg border border-gray-200'>
 				<CardContent className='flex items-center p-2'>
@@ -74,7 +49,7 @@ export default function OrgCard({ data, orientation }: OrgCardProps) {
 			</Card>
 
 			{/* Output Handle - Always show for potential subordinates */}
-			<Handle type='source' position={sourcePosition} id='source' style={getSourceHandleStyle()} />
+			<Handle type='source' position={Position.Bottom} id='source' style={getSourceHandleStyle()} />
 		</div>
 	);
 }
