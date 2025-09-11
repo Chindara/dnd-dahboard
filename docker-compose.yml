@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  frontend:
+    build: .
+    ports:
+      - '5137:80' # host:container (host uses 5137, container listens on 80)
+    restart: always

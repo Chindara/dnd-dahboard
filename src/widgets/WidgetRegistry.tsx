@@ -14,6 +14,21 @@ import { Widget6 } from './Widget6';
 import { Widget7 } from './Widget7';
 import { Widget8 } from './Widget8';
 
+import imgTotalSolarSales from '@/assets/totalSolarSales.png';
+import imgWidget1 from '@/assets/Widget1.png';
+import imgWidget2 from '@/assets/Widget2.png';
+import imgWidget3 from '@/assets/Widget3.png';
+import imgWidget4 from '@/assets/Widget4.png';
+import imgWidget5 from '@/assets/Widget5.png';
+import imgWidget6 from '@/assets/Widget6.png';
+import imgWidget7 from '@/assets/Widget7.png';
+import imgWidget8 from '@/assets/Widget8.png';
+import imgAverageHours from '@/assets/averageHours.png';
+import imgAverageCheckIn from '@/assets/averageCheckIn.png';
+import imgAverageCheckOut from '@/assets/averageCheckOut.png';
+import imgOnTimeArrival from '@/assets/onTimeArrival.png';
+import imgMyAttendance from '@/assets/myAttendance.png';
+
 // src/widgets/widgetRegistry.tsx
 
 export interface WidgetConfig {
@@ -34,7 +49,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'totalSolarSales',
 		name: 'Total Solar Sales',
 		description: 'Total solar sales made.',
-		image: '@/../src/assets/totalSolarSales.png',
+		image: imgTotalSolarSales,
 		group: 'Sales',
 		minW: 2,
 		minH: 2,
@@ -47,7 +62,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'totalEmployees',
 		name: 'Total Employees',
 		description: 'Total number of employees.',
-		image: '@/../src/assets/Widget1.png',
+		image: imgWidget1,
 		group: 'Analytics',
 		minW: 2,
 		minH: 3,
@@ -59,7 +74,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget2',
 		name: 'Revenue Chart',
 		description: 'A chart showing revenue over time.',
-		image: '@/../src/assets/Widget2.png',
+		image: imgWidget2,
 		group: 'Charts',
 		minW: 4,
 		minH: 4,
@@ -71,7 +86,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget3',
 		name: 'Bar Chart - Custom Label',
 		description: 'Bar Chart - Custom Label',
-		image: '@/../src/assets/Widget3.png',
+		image: imgWidget3,
 		group: 'Charts',
 		minW: 2,
 		minH: 2,
@@ -83,7 +98,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget4',
 		name: 'Line Chart - Multiple',
 		description: 'Line Chart - Multiple',
-		image: '@/../src/assets/Widget4.png',
+		image: imgWidget4,
 		group: 'Charts',
 		minW: 3,
 		minH: 2,
@@ -95,7 +110,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget5',
 		name: 'Line Chart - Custom Label',
 		description: 'Line Chart - Custom Label',
-		image: '@/../src/assets/Widget5.png',
+		image: imgWidget5,
 		group: 'Charts',
 		minW: 2,
 		minH: 2,
@@ -107,7 +122,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget6',
 		name: 'Radar Chart - Lines Only',
 		description: 'Radar Chart - Lines Only',
-		image: '@/../src/assets/Widget6.png',
+		image: imgWidget6,
 		group: 'Charts',
 		minW: 2,
 		minH: 2,
@@ -119,7 +134,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget7',
 		name: 'Radial Chart - Grid',
 		description: 'Radial Chart - Grid',
-		image: '@/../src/assets/Widget7.png',
+		image: imgWidget7,
 		group: 'Charts',
 		minW: 4,
 		minH: 4,
@@ -131,7 +146,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'widget8',
 		name: 'Radial Chart - Stacked',
 		description: 'Radial Chart - Stacked',
-		image: '@/../src/assets/Widget8.png',
+		image: imgWidget8,
 		group: 'Charts',
 		minW: 2,
 		minH: 2,
@@ -143,7 +158,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'averageHours',
 		name: 'Average Hours Worked',
 		description: 'Average hours worked by employees.',
-		image: '@/../src/assets/averageHours.png',
+		image: imgAverageHours,
 		group: 'Attendance',
 		minW: 2,
 		minH: 2,
@@ -155,7 +170,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'averageCheckIn',
 		name: 'Average Check-In Time',
 		description: 'Average check-in time of employees.',
-		image: '@/../src/assets/averageCheckIn.png',
+		image: imgAverageCheckIn,
 		group: 'Attendance',
 		minW: 2,
 		minH: 2,
@@ -167,7 +182,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'averageCheckOut',
 		name: 'Average Check-Out Time',
 		description: 'Average check-out time of employees.',
-		image: '@/../src/assets/averageCheckOut.png',
+		image: imgAverageCheckOut,
 		group: 'Attendance',
 		minW: 2,
 		minH: 2,
@@ -179,7 +194,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'onTimeArrival',
 		name: 'On-Time Arrival Rate',
 		description: 'On-time arrival rate of employees.',
-		image: '@/../src/assets/onTimeArrival.png',
+		image: imgOnTimeArrival,
 		group: 'Attendance',
 		minW: 2,
 		minH: 2,
@@ -191,7 +206,7 @@ export const widgetRegistry: Record<WidgetKey, WidgetConfig> = {
 		id: 'myAttendance',
 		name: 'My Attendance',
 		description: 'View my attendance details.',
-		image: '@/../src/assets/MyAttendance.png',
+		image: imgMyAttendance,
 		group: 'Personal',
 		minW: 3,
 		minH: 4,

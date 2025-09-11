@@ -4,7 +4,8 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { widgetRegistry, WidgetKey, WidgetGroup } from '@/widgets/WidgetRegistry';
+import { widgetRegistry } from '@/widgets/WidgetRegistry';
+import { WidgetGroup, WidgetKey } from '@/types/DashboardWidget';
 
 interface WidgetSheetProps {
 	open: boolean;

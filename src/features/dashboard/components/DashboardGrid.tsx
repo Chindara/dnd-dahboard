@@ -3,7 +3,8 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { widgetRegistry, WidgetKey } from '@/widgets/WidgetRegistry';
+import { widgetRegistry } from '@/widgets/WidgetRegistry';
+import { WidgetKey } from '@/types/DashboardWidget';
 
 type DashboardWidget = {
 	key: string;

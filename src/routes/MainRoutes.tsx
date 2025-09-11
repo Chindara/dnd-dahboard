@@ -9,6 +9,7 @@ import AuthGuard from '@/utils/route-guard/AuthGuard';
 // PAGES
 const Dashboard = Loadable(lazy(() => import('@/pages/Dashboard')));
 const Hierarchy = Loadable(lazy(() => import('@/pages/Hierarchy')));
+const Company = Loadable(lazy(() => import('@/pages/Company')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -31,6 +32,10 @@ const MainRoutes = {
 				{
 					path: 'hierarchy',
 					element: <Hierarchy />,
+				},
+				{
+					path: 'company',
+					element: <Company />,
 				},
 			],
 		},

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';

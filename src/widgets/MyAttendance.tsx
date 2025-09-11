@@ -1,7 +1,7 @@
 import { Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { WidgetCard } from './WidgetCard';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { CustomChartLegend } from '@/components/CustomChartLegend';
 import { CheckCircle } from 'lucide-react';
 
