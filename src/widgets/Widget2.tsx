@@ -5,6 +5,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis } from 'rechar
 
 import { WidgetCard } from './WidgetCard';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { useDashboardStore } from '@/hooks/dashboardStore';
 
 export const description = 'A multiple bar chart';
 
@@ -35,8 +36,22 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function Widget2() {
+	//get dateRange from zustand
+	const { dateRange } = useDashboardStore();
+
 	return (
-		<WidgetCard title='Revenue' count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)} unit='rupees'>
+		<WidgetCard
+			title='Revenue'
+			count={chartData.reduce((acc, curr) => acc + curr.desktop + curr.mobile, 0)}
+			unit='rupees'
+			footer={
+				<div className='text-sm text-gray-500'>
+					{ dateRange?.from ? `From: ${new Date(( dateRange?.from) as string | Date).toLocaleDateString()}` : 'From: -'}
+					{' • '}
+					{ dateRange?.to ? `To: ${new Date(( dateRange?.to) as string | Date).toLocaleDateString()}` : 'To: -'}
+				</div>
+			}
+		>
 			<ChartContainer config={chartConfig} className='w-full h-full [&_.recharts-responsive-container]:!h-full'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<BarChart accessibilityLayer data={chartData}>

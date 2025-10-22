@@ -11,17 +11,18 @@ import {
 
 interface DeleteModalProps {
 	openModal: boolean;
+	alertMessage: string;
 	setOpenModal: React.Dispatch<React.SetStateAction<boolean>>; // Type definition for the prop
 	onDelete: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const DeleteModal = ({ openModal, setOpenModal, onDelete }: DeleteModalProps) => {
+const DeleteModal = ({ openModal, setOpenModal, onDelete, alertMessage }: DeleteModalProps) => {
 	return (
 		<AlertDialog open={openModal}>
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-					<AlertDialogDescription>This action cannot be undone. This will permanently delete your sample record.</AlertDialogDescription>
+					<AlertDialogDescription>{alertMessage}</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel onClick={() => setOpenModal(false)}>Cancel</AlertDialogCancel>
