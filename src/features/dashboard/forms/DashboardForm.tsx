@@ -8,8 +8,11 @@ import { useResizeDetector } from 'react-resize-detector';
 import { DashboardGrid } from '../components/DashboardGrid';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TabDialog from '../components/TabDialog';
-import { Pencil } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 import { DashboardTab, DashboardWidget, WidgetKey } from '@/types/DashboardWidget';
+import DateRangePicker from '@/components/shared/DateRangePicker';
+import { useDashboardStore } from '@/hooks/dashboardStore';
+import DeleteModal from '@/components/shared/DeleteModal';
 
 const STORAGE_KEY = 'dashboard-widgets';
 
@@ -19,10 +22,13 @@ const DashboardForm = () => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const [dashboardTabs, setDashboardTabs] = useState<DashboardTab[]>([{ id: 'panel1', label: 'WorkHub Overview', widgets: [] }]);
-	const [activeTab, setActiveTab] = useState('panel1');
+	const { activeTab, setActiveTab } = useDashboardStore();
 	const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 	const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
 	const [renameTabLabel, setRenameTabLabel] = useState('');
+	const { setDateRange } = useDashboardStore();
+	const [deleteModal, setDeleteModal] = useState<boolean>(false);
+	const [tabToDelete, setTabToDelete] = useState<string | null>(null);
 
 	const handleAddTab = (label: string) => {
 		if (!label.trim()) return;
@@ -51,6 +57,10 @@ const DashboardForm = () => {
 		setRenameTabLabel(tab.label);
 		setActiveTab(tab.id); // make it active if not already
 		setIsRenameDialogOpen(true);
+	};
+
+	const openDeleteModal = () => {
+		setDeleteModal(true);
 	};
 
 	// Load from localStorage on mount
@@ -84,6 +94,12 @@ const DashboardForm = () => {
 		setDashboardTabs(updated);
 	};
 
+	const handleDateRangeChange = (from: string | Date | null, to: string | Date | null) => {
+		setDateRange(from, to);
+
+		if (!activeTab) return;
+	};
+
 	// Save to localStorage when Done is clicked
 	const handleDone = () => {
 		console.log('Saving dashboard tabs to localStorage:', dashboardTabs);
@@ -100,11 +116,30 @@ const DashboardForm = () => {
 		setDashboardTabs(updated);
 	};
 
+	const handleDelete = () => {
+		if (!tabToDelete) return;
+
+		const updatedTabs = dashboardTabs.filter((tab) => tab.id !== tabToDelete);
+		setDashboardTabs(updatedTabs);
+
+		if (activeTab === tabToDelete && updatedTabs.length > 0) {
+			setActiveTab(updatedTabs[0].id);
+		}
+		// Save updated tabs to localStorage
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTabs));
+
+		console.log('Tab delete', tabToDelete);
+		setDeleteModal(false);
+	};
+
 	return (
 		<div>
 			{/* Header */}
 			<div className='p-4 border-b flex justify-between items-center'>
 				<h2 className='text-xl font-semibold'>My Dashboard</h2>
+				<div className='relative z-50 overflow-hidden'>
+					<DateRangePicker onChange={handleDateRangeChange} />
+				</div>
 			</div>
 
 			<div className='flex justify-between'>
@@ -115,9 +150,22 @@ const DashboardForm = () => {
 								<div key={tab.id} className='flex items-center gap-2'>
 									{tab.label}
 									{tab.id === activeTab && (
-										<Button variant='ghost' size='icon' className='size-6' onClick={() => openRenameDialog(tab)}>
-											<Pencil className='size-4' />
-										</Button>
+										<>
+											<Button variant='ghost' size='icon' className='size-6' onClick={() => openRenameDialog(tab)}>
+												<Pencil className='size-4' />
+											</Button>
+											<Button
+												variant='ghost'
+												size='icon'
+												className='size-6'
+												onClick={() => {
+													setTabToDelete(tab.id);
+													openDeleteModal();
+												}}
+											>
+												<Trash2 className='size-4' />
+											</Button>
+										</>
 									)}
 								</div>
 							</TabsTrigger>
@@ -158,6 +206,14 @@ const DashboardForm = () => {
 
 			{/* Widget Sheet Component */}
 			<WidgetSheet open={drawerOpen} onOpenChange={setDrawerOpen} onAddWidget={handleAddWidget} />
+
+			{/* Delete Modal */}
+			<DeleteModal
+				openModal={deleteModal}
+				setOpenModal={setDeleteModal}
+				onDelete={handleDelete}
+				alertMessage='This action will permanently delete this tab and all of its widgets. You cannot recover them after deletion. Do you want to proceed?'
+			/>
 		</div>
 	);
 };
